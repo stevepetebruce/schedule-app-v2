@@ -10,8 +10,6 @@ interface IProps {
 
 const Layout: FunctionComponent<IProps> = ({main}) => {
   const { logout, authenticated } = useAuth();
-	// const authenticated = false;
-	// const logout = () => null
 
 	return <div className="bg-gray-900 max-w-screen-2xl mx-auto text-white">
 		<nav className="bg-gray-800" style={{height: "64px"}}>

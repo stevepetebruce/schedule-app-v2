@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 // import { useRouter } from "next/router";
 // import Link from "next/link";
 // import { Image } from "cloudinary-react";
-// import { SearchBox } from "./searchBox";
+import SearchBox from "./searchBox";
 // import {
 //   CreateHouseMutation,
 //   CreateHouseMutationVariables,
@@ -49,7 +49,13 @@ function venueForm({}: IProps) {
       <h1 className="text-xl">Add Venue</h1>
       <div className="mt-4">
         <label htmlFor="search" className="block">Search for venue address</label>
-        {/* Add Search field */}
+        <SearchBox onSelectAddress={(address, latitude, longitude) => {
+            setValue("address", address)
+            setValue("latitude", latitude)
+            setValue("longitude", longitude)
+          }}
+          defaultValue="" 
+        />
         {errors.address && <p>{errors.address.message}</p>}
       </div>
     </form>

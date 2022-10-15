@@ -53,7 +53,18 @@ const ReadySearchBox = ({onSelectAddress, defaultValue}: ISeachBoxProps) => {
   } = usePlacesAutocomplete({ debounce: 300, defaultValue})
 
   const handleSelect = async(address: string) => {
-    console.log({address})
+    setValue(address, false);
+    clearSuggestions();
+
+    try {
+      
+      const results = await getGeocode({address});
+      const {lat, lng} = await getLatLng(results[0]);
+      onSelectAddress(address, lat, lng);
+
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   console.log({status, data})
@@ -76,6 +87,14 @@ const ReadySearchBox = ({onSelectAddress, defaultValue}: ISeachBoxProps) => {
         className="w-full p-2"
         autoComplete="off"
       />
+      <ComboboxPopover>
+        <ComboboxList>
+          {status === "OK" && data.map(({ place_id, description }) => (<ComboboxOption 
+            key={place_id}
+            value={description} 
+          />))}
+        </ComboboxList>
+      </ComboboxPopover>
     </Combobox>
   )
 }

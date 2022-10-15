@@ -30,6 +30,8 @@ function venueForm({}: IProps) {
 
   const {register, handleSubmit, setValue, errors, watch } = useForm<IFormData>({defaultValues: {}})
 
+  const address = watch("address")
+
   useEffect(() => {
     register({ name: "venue" }, { required: "Please enter the venue" })
     register({ name: "address" }, { required: "Please enter the address" })
@@ -57,6 +59,7 @@ function venueForm({}: IProps) {
           defaultValue="" 
         />
         {errors.address && <p>{errors.address.message}</p>}
+        <h2>{address}</h2>
       </div>
     </form>
   )

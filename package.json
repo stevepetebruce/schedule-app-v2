@@ -12,7 +12,8 @@
     "db:generate": "yarn prisma generate",
     "db:migrate:new": "yarn prisma migrate save --experimental",
     "db:migrate:up": "yarn prisma migrate up --experimental",
-    "db:migrate:down": "yarn prisma migrate down --experimental"
+    "db:migrate:down": "yarn prisma migrate down --experimental",
+    "prisma:studio": "yarn prisma studio"
   },
   "dependencies": {
     "@apollo/client": "^3.2.5",

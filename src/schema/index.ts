@@ -1,6 +1,22 @@
-// import { buildSchemaSync } from "type-graphql";
+import { buildSchemaSync, Resolver, Query } from "type-graphql";
 // import { ImageResolver } from "./image";
-// import { HouseResolver } from "./house";
-// import { authChecker } from "./auth";
+// import { VenueResolver } from "./venue";
+import { authChecker } from "./auth";
 
-export {};
+@Resolver()
+class DummyResolver {
+  @Query(() => String)
+  hello() {
+    return "Hello world!";
+  }
+}
+
+export const schema = buildSchemaSync({
+  resolvers: [
+    DummyResolver,
+    // ImageResolver,
+    // VenueResolver,
+  ],
+  authChecker,
+  emitSchemaFile: process.env.NODE_ENV === "development",
+});

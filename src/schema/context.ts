@@ -1,3 +1,10 @@
-// import { PrismaClient } from "../prisma";
+import { PrismaClient } from "../prisma";
 
-export {};
+export interface Context {
+  prisma: PrismaClient;
+  uid: string | null;
+}
+
+export interface AuthorizedContext extends Context {
+  uid: string;
+}

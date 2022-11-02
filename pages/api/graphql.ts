@@ -11,7 +11,8 @@ const server = new ApolloServer({
   context: async ({ req }: { req: NextApiRequest }): Promise<Context> => {
     const uid = await loadIdToken(req);
     return { prisma, uid };
-  }
+  },
+  tracing: process.env.NODE_ENV === "development"
 })
 
 const handler = server.createHandler({ path: "/api/graphql" });

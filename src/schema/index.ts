@@ -1,5 +1,5 @@
 import { buildSchemaSync, Resolver, Query } from "type-graphql";
-// import { ImageResolver } from "./image";
+import { ImageResolver } from "./image";
 // import { VenueResolver } from "./venue";
 import { authChecker } from "./auth";
 
@@ -14,7 +14,7 @@ class DummyResolver {
 export const schema = buildSchemaSync({
   resolvers: [
     DummyResolver,
-    // ImageResolver,
+    ImageResolver,
     // VenueResolver,
   ],
   authChecker,

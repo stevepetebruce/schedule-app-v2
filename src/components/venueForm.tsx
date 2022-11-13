@@ -24,7 +24,11 @@ const SIGNATURE_MUTATION = gql`
   }
 `;
 
-async function uploadImage(image: File, signature: string, timestamp: number) {
+async function uploadImage(
+  image: File,
+  signature: string,
+  timestamp: number
+): Promise<IUploadImageResponse> {
   const url = `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/upload`;
 
   const formData = new FormData();
@@ -39,6 +43,10 @@ async function uploadImage(image: File, signature: string, timestamp: number) {
   });
 
   return response.json();
+}
+
+interface IUploadImageResponse {
+  secure_url: string;
 }
 
 interface IFormData {
@@ -80,6 +88,7 @@ function venueForm({}: IProps) {
       console.log({ signature, timestamp });
       const imageData = await uploadImage(data.image[0], signature, timestamp);
       console.log(imageData);
+      const imageUrl = imageData.secure_url;
     }
   };
 

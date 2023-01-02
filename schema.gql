@@ -10,8 +10,35 @@ type ImageSignature {
 
 type Mutation {
   createImageSignature: ImageSignature!
+input CoordinatesInput {
+  latitude: Float!
+  longitude: Float!
+}
+
+type Mutation {
+  createVenue(input: VenueInput!): Venue
 }
 
 type Query {
   hello: String!
+}
+
+type Venue {
+  address: String!
+  capacity: Int!
+  id: ID!
+  image: String!
+  latitude: Float!
+  longitude: Float!
+  publicId: String!
+  userId: String!
+  venue: String!
+}
+
+input VenueInput {
+  address: String!
+  capacity: Int!
+  coordinates: CoordinatesInput!
+  image: String!
+  venue: String!
 }

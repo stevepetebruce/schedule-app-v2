@@ -2,13 +2,13 @@ import Link from "next/link";
 import { useState, useEffect, ChangeEvent } from "react";
 import { useForm } from "react-hook-form";
 import { useMutation, gql } from "@apollo/client";
-// import { useRouter } from "next/router";
+import { useRouter } from "next/router";
 // import { Image } from "cloudinary-react";
 import SearchBox from "./searchBox";
-// import {
-//   CreateHouseMutation,
-//   CreateHouseMutationVariables,
-// } from "src/generated/CreateHouseMutation";
+import {
+  CreateVenueMutation,
+  CreateVenueMutationVariables,
+} from "src/generated/CreateVenueMutation";
 // import {
 //   UpdateHouseMutation,
 //   UpdateHouseMutationVariables,
@@ -58,6 +58,14 @@ interface IFormData {
   image: FileList;
 }
 
+const CREATE_VENUE_MUTATION = gql`
+  mutation CreateVenueMutation($input: VenueInput!) {
+    createVenue(input: $input) {
+      id
+    }
+  }
+`;
+
 interface IProps {}
 
 function venueForm({}: IProps) {
@@ -68,8 +76,13 @@ function venueForm({}: IProps) {
 
   const address = watch("address");
 
-  const [createSignature] =
-    useMutation<CreateSignatureMutation>(SIGNATURE_MUTATION);
+  const address = watch("address")
+
+  const [createVenue] = useMutation<CreateVenueMutation, CreateVenueMutationVariables>(CREATE_VENUE_MUTATION, {
+    onCompleted: () => {
+      router.push("/");
+    },
+  });
 
   useEffect(() => {
     register({ name: "venue" }, { required: "Please enter the venue" });
